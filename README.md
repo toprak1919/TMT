@@ -3,89 +3,63 @@
 <br>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&duration=3000&pause=1000&color=58A6FF&center=true&vCenter=true&multiline=true&repeat=false&width=700&height=80&lines=INFOFLOW+RAG+Research;TMT+%7C+Business+Solutions">
-  <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&duration=3000&pause=1000&color=0055A4&center=true&vCenter=true&multiline=true&repeat=false&width=700&height=80&lines=INFOFLOW+RAG+Research;TMT+%7C+Business+Solutions">
-  <img alt="INFOFLOW RAG Research" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&duration=3000&pause=1000&color=0055A4&center=true&vCenter=true&multiline=true&repeat=false&width=700&height=80&lines=INFOFLOW+RAG+Research;TMT+%7C+Business+Solutions">
+  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=36&duration=3000&pause=1000&color=58A6FF&center=true&vCenter=true&repeat=false&width=550&height=45&lines=INFOFLOW+RAG+Research">
+  <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=36&duration=3000&pause=1000&color=0D1117&center=true&vCenter=true&repeat=false&width=550&height=45&lines=INFOFLOW+RAG+Research">
+  <img alt="INFOFLOW RAG Research" src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=36&duration=3000&pause=1000&color=0D1117&center=true&vCenter=true&repeat=false&width=550&height=45&lines=INFOFLOW+RAG+Research">
 </picture>
 
 <br>
 
-**Retrieval-Augmented Generation Pipeline &mdash; Research & Optimization**
+<kbd>&nbsp;&nbsp;TMT | Business Solutions&nbsp;&nbsp;</kbd>&nbsp;&nbsp;&nbsp;<kbd>&nbsp;&nbsp;24.02.2026&nbsp;&nbsp;</kbd>
+
+<br><br>
+
+Improving chunking, ingestion, retrieval, and generation<br>for the INFOFLOW RAG pipeline on **Supabase + LangChain**.
 
 <br>
 
-[![Status](https://img.shields.io/badge/STATUS-ACTIVE_RESEARCH-00C853?style=for-the-badge&logo=target&logoColor=white)]()
-[![Stack](https://img.shields.io/badge/STACK-Supabase_+_LangChain-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)]()
-[![Date](https://img.shields.io/badge/DATE-24.02.2026-2962FF?style=for-the-badge&logo=calendar&logoColor=white)]()
-[![Scope](https://img.shields.io/badge/SCOPE-15_Pages-FF6D00?style=for-the-badge&logo=readthedocs&logoColor=white)]()
+[![Supabase](https://img.shields.io/badge/Supabase-pgvector-3ECF8E?style=flat&logo=supabase&logoColor=white)]()&nbsp;
+[![LangChain](https://img.shields.io/badge/LangChain-Pipeline-1C3C3C?style=flat&logo=langchain&logoColor=white)]()&nbsp;
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-tsvector-4169E1?style=flat&logo=postgresql&logoColor=white)]()&nbsp;
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)]()
 
 <br>
 
-```ansi
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   Improving document ingestion, chunking, retrieval, and             ║
-║   generation quality for the INFOFLOW RAG pipeline.                  ║
-║                                                                      ║
-║   5 Research Areas  ·  8 Priorities  ·  Hybrid Deployment Strategy   ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-```
+---
 
-<br>
+**[Chunking](#1--chunking)** · **[Multi-modal](#2--multi-modal-ingestion)** · **[Retrieval](#3--retrieval)** · **[Architectures](#4--alternative-architectures)** · **[Evaluation](#5--evaluation)** · **[Deployment](#-deployment-strategy)** · **[Roadmap](#-roadmap)**
 
-<a href="#-research-area-1-document-processing--chunking">
-  <img src="https://img.shields.io/badge/1-Chunking-0055A4?style=flat-square" alt="Chunking">
-</a>&nbsp;
-<a href="#-research-area-2-multi-modal-document-ingestion">
-  <img src="https://img.shields.io/badge/2-Multi--modal-0055A4?style=flat-square" alt="Multi-modal">
-</a>&nbsp;
-<a href="#-research-area-3-retrieval-improvements">
-  <img src="https://img.shields.io/badge/3-Retrieval-0055A4?style=flat-square" alt="Retrieval">
-</a>&nbsp;
-<a href="#-research-area-4-alternative-architectures">
-  <img src="https://img.shields.io/badge/4-Architectures-0055A4?style=flat-square" alt="Architectures">
-</a>&nbsp;
-<a href="#-research-area-5-evaluation--benchmarking">
-  <img src="https://img.shields.io/badge/5-Evaluation-0055A4?style=flat-square" alt="Evaluation">
-</a>&nbsp;
-<a href="#%EF%B8%8F-model-deployment-strategy-cloud--local">
-  <img src="https://img.shields.io/badge/6-Deployment-6B4C9A?style=flat-square" alt="Deployment">
-</a>&nbsp;
-<a href="#-prioritization-roadmap">
-  <img src="https://img.shields.io/badge/7-Roadmap-C62828?style=flat-square" alt="Roadmap">
-</a>&nbsp;
-<a href="#-references">
-  <img src="https://img.shields.io/badge/8-References-555555?style=flat-square" alt="References">
-</a>
+---
 
 </div>
 
 <br>
 
----
-
-<br>
-
-## Overview
-
-This document presents research into **five key areas** for improving the INFOFLOW RAG pipeline, along with a **model deployment strategy**, a **prioritized implementation roadmap**, and a comprehensive **reference list**.
-
-The current stack is built on **Supabase / PostgreSQL** with **LangChain** and uses vector cosine similarity for retrieval. Each research area identifies concrete improvements that remain compatible with this architecture.
+## Current pipeline
 
 ```mermaid
 graph LR
-    A["<b>Documents</b><br/>PDF, Scans, Tables"] --> B["<b>Ingestion</b><br/>Chunking + OCR"]
-    B --> C["<b>Indexing</b><br/>Embeddings + pgvector"]
-    C --> D["<b>Retrieval</b><br/>Hybrid Search + Reranking"]
-    D --> E["<b>Generation</b><br/>LLM + Context"]
+    A["Documents"] --> B["PyPDFLoader"]
+    B --> C["RecursiveCharacterTextSplitter\n(1000 chars)"]
+    C --> D["Embeddings\n(1024-dim)"]
+    D --> E["Supabase pgvector"]
+    E --> F["Cosine similarity"]
+    F --> G["AzureGraderCompressor"]
+    G --> H["LLM response"]
 
-    style A fill:#1a1a2e,stroke:#58A6FF,color:#fff
-    style B fill:#1a1a2e,stroke:#58A6FF,color:#fff
-    style C fill:#1a1a2e,stroke:#58A6FF,color:#fff
-    style D fill:#1a1a2e,stroke:#58A6FF,color:#fff
-    style E fill:#1a1a2e,stroke:#58A6FF,color:#fff
+    style A fill:#161b22,stroke:#30363d,color:#c9d1d9
+    style B fill:#161b22,stroke:#f85149,color:#f85149
+    style C fill:#161b22,stroke:#f85149,color:#f85149
+    style D fill:#161b22,stroke:#30363d,color:#c9d1d9
+    style E fill:#161b22,stroke:#3ECF8E,color:#3ECF8E
+    style F fill:#161b22,stroke:#f85149,color:#f85149
+    style G fill:#161b22,stroke:#f85149,color:#f85149
+    style H fill:#161b22,stroke:#30363d,color:#c9d1d9
 ```
+
+<sup>Red = bottleneck this research addresses.</sup>
+
+**Problems:** Fixed 1000-char chunking ignores semantics. No OCR for scans. Vector-only retrieval misses keyword matches. LLM-based reranker is slow and expensive.
 
 <br>
 
@@ -93,107 +67,55 @@ graph LR
 
 <br>
 
-## <img src="https://img.shields.io/badge/1-0055A4?style=for-the-badge" alt="1" height="24"> Research Area 1: Document Processing & Chunking
+## 1 &mdash; Chunking
 
-> [!NOTE]
-> **Chunking determines how documents are decomposed into searchable units.** Our fixed character limit (1000 chars) cuts sentences and paragraphs without regard for semantic boundaries. Better chunking strategies can significantly improve retrieval quality.
+> Current: `RecursiveCharacterTextSplitter` at 1000 chars. Cuts mid-sentence, ignores document structure.
+
+| Approach | How it works | Tools |
+|:---------|:-------------|:------|
+| **Semantic Chunking** | Split where embedding similarity between sentences drops below threshold | `LangChain SemanticChunker`, `LlamaIndex SemanticSplitterNodeParser`, `chonkie` |
+| **Late Chunking** | Embed full document first, then pool token embeddings into chunks&mdash;context bleeds across boundaries | `jina-embeddings-v2` |
+| **Structure-aware** | Use headings/paragraphs/tables as natural chunk boundaries | `Docling` (IBM), `Unstructured.io` |
+| **Contextual Retrieval** | Prepend each chunk with a short LLM-generated context prefix at index time. Reduces failed retrievals by **~49%** (Anthropic) | Anthropic Blog; combinable with BM25 |
+| **Parent-Child** | Small chunks for retrieval precision, return the larger parent chunk to the LLM for more context | `LangChain ParentDocumentRetriever` |
+
+> [!TIP]
+> **Quick wins:** Semantic Chunking and Contextual Retrieval drop in without changing Supabase schema. Structure-aware chunking is high-value for PDFs with complex layouts.
 
 <br>
 
-### Approaches
+---
 
-<details open>
-<summary><h4>Semantic Chunking</h4></summary>
+<br>
 
-<table>
-<tr><td>
+## 2 &mdash; Multi-modal Ingestion
 
-Chunks are formed based on **semantic similarity** instead of a fixed character count. The text is split into sentences, embeddings are calculated, and splits are made where semantic similarity between consecutive sentences falls below a threshold.
+> Current: `PyPDFLoader` extracts embedded text only. Scanned pages, images, and tables return nothing.
+
+### OCR
+
+| Tool | Type | Best for |
+|:-----|:-----|:---------|
+| **Tesseract** | ![](https://img.shields.io/badge/local-3ECF8E?style=flat-square) | Simple text, fast setup |
+| **DocTR** | ![](https://img.shields.io/badge/local-3ECF8E?style=flat-square) | Complex layouts, deep-learning based |
+| **Google Document AI** | ![](https://img.shields.io/badge/cloud-2962FF?style=flat-square) | 200+ printed / 50+ handwritten languages |
+
+### Tables
 
 | Tool | Notes |
 |:-----|:------|
-| `LangChain SemanticChunker` | Experimental |
-| `LlamaIndex SemanticSplitterNodeParser` | Production-ready |
-| `chonkie` | Lightweight library, multiple strategies |
+| **Docling + TableFormer** | DL-based table recognition + structured chunking in one library |
+| **Camelot** | Python-native, PDF tables specifically |
+| **Unstructured.io** | Extracts tables as structured elements |
 
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary><h4>Late Chunking <sub>(Jina AI)</sub></h4></summary>
-
-<table>
-<tr><td>
-
-Instead of chunking first and then embedding, the **entire document** is processed by a long-context embedding model. Token embeddings are then divided into chunks and pooled. This allows the document context to flow into each chunk.
-
-- Jina AI Blog: Late Chunking
-- Requires specific embedding models with long context (e.g., `jina-embeddings-v2`)
-
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary><h4>Structure-aware Chunking</h4></summary>
-
-<table>
-<tr><td>
-
-Uses document structure (headings, paragraphs, tables, lists) as chunk boundaries instead of a fixed character count.
-
-| Tool | Description |
-|:-----|:------------|
-| `Docling` (IBM) | Understands document structure, provides structured output |
-| `Unstructured.io` | Analyzes layouts and extracts structured elements |
-
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary><h4>Contextual Retrieval <sub>(Anthropic)</sub></h4></summary>
-
-<table>
-<tr><td>
-
-Each chunk is enriched during indexing with a short context section explaining where the chunk is located within the overall document. This contextual prefix is prepended to the chunk text before the embedding is calculated.
-
-> According to Anthropic, this reduces "failed retrievals" by up to **49%**.
-
-- Can be combined with BM25 and Reranking
-
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary><h4>Parent-Child Document Retrieval</h4></summary>
-
-<table>
-<tr><td>
-
-Small chunks are used for retrieval (high precision), but the parent chunk (larger text section) is returned when inserted into the LLM context. This provides the LLM with more context.
+### Visual understanding
 
 | Tool | Notes |
 |:-----|:------|
-| `LangChain ParentDocumentRetriever` | Recommended |
-| LangChain Docs: Parent Document Retriever | Documentation |
-
-</td></tr>
-</table>
-
-</details>
-
-<br>
+| **ColPali** | Vision-Language model that embeds document pages as images. Advanced track&mdash;needs dedicated embedding path. |
 
 > [!TIP]
-> **Relevance for our Stack** &mdash; Our `RecursiveCharacterTextSplitter` is the simplest approach. **Semantic Chunking** and **Contextual Retrieval** are promising improvements and can be introduced without changing the Supabase storage architecture. Structure-aware chunking is particularly relevant for PDFs with complex layouts. These methods are Supabase-compatible on the storage side, but can require additional compute/runtime dependencies during ingestion.
+> **Recommendation:** Start with **Docling**&mdash;it handles OCR, tables, and structured chunking in a single open-source library. Everything stores back into Supabase/pgvector as before.
 
 <br>
 
@@ -201,74 +123,44 @@ Small chunks are used for retrieval (high precision), but the parent chunk (larg
 
 <br>
 
-## <img src="https://img.shields.io/badge/2-0055A4?style=for-the-badge" alt="2" height="24"> Research Area 2: Multi-modal Document Ingestion
+## 3 &mdash; Retrieval
 
-> [!NOTE]
-> **Currently, we only process text from documents.** Scanned PDFs, images, tables, and complex layouts are captured poorly or not at all. Many user documents contain exactly such content.
+> Current: Vector cosine similarity only. Misses exact terms, technical jargon, and proper names.
 
-<br>
+### Hybrid Search (Vector + BM25)
 
-### Approaches
+Combine semantic vectors with PostgreSQL full-text search. Merge results via **Reciprocal Rank Fusion**.
 
-<details open>
-<summary><h4>OCR for Scanned PDFs / Images</h4></summary>
+```
+  Vector search  ─┐
+                   ├─► RRF merge ─► Final ranked results
+  BM25 (tsvector) ─┘
+```
 
-<table>
-<tr><td>
+Zero new dependencies&mdash;`tsvector` / `ts_rank` are built into PostgreSQL. Extend `match_documents` and you're done.
 
-Our `PyPDFLoader` only extracts embedded text. Scanned documents yield empty results.
+### Reranking
 
-| Tool | Type | Highlights |
-|:-----|:-----|:-----------|
-| **Tesseract OCR** | ![](https://img.shields.io/badge/Open--source-3ECF8E?style=flat-square) | Locally executable, good for simple text recognition |
-| **DocTR** | ![](https://img.shields.io/badge/Open--source-3ECF8E?style=flat-square) | Deep-learning-based, better than Tesseract for complex layouts |
-| **Google Vertex AI Document AI** | ![](https://img.shields.io/badge/Cloud-2962FF?style=flat-square) | 200+ printed and 50+ handwritten languages |
+Replace `AzureGraderCompressor` (full LLM call per doc) with a dedicated cross-encoder. Single forward pass, **100&ndash;600ms** added latency, **15&ndash;40% accuracy gain**.
 
-</td></tr>
-</table>
+| Model | License | Specs |
+|:------|:-------:|:------|
+| **mxbai-rerank-v2** | ![](https://img.shields.io/badge/Apache_2.0-3ECF8E?style=flat-square) | SOTA. 0.5B/1.5B params, 100+ langs, 8k context |
+| **bge-reranker-v2-m3** | ![](https://img.shields.io/badge/MIT-3ECF8E?style=flat-square) | Solid all-rounder |
+| **Jina Reranker v2** | ![](https://img.shields.io/badge/NC_4.0-FFAB00?style=flat-square) | Fast, multilingual, flash attention |
+| **FlashRank** | ![](https://img.shields.io/badge/Apache_2.0-3ECF8E?style=flat-square) | ONNX, runs on CPU, no-GPU fallback |
+| **rerankers** | ![](https://img.shields.io/badge/Apache_2.0-3ECF8E?style=flat-square) | Unified API across all models above |
 
-</details>
+### Query expansion
 
-<details>
-<summary><h4>Table Extraction</h4></summary>
-
-<table>
-<tr><td>
-
-Tables in PDFs are often lost or rendered unusable during text-based parsing.
-
-| Tool | Type | Highlights |
-|:-----|:-----|:-----------|
-| **Docling + TableFormer** | ![](https://img.shields.io/badge/Open--source-3ECF8E?style=flat-square) | Deep-learning-based table recognition; also usable for structured chunking |
-| **Camelot** | ![](https://img.shields.io/badge/Open--source-3ECF8E?style=flat-square) | Python library specifically for tables in PDFs |
-| **Unstructured.io** | ![](https://img.shields.io/badge/Open--source-3ECF8E?style=flat-square) | Recognizes and extracts tables as structured elements |
-
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary><h4>Visual Document Understanding</h4></summary>
-
-<table>
-<tr><td>
-
-Instead of extracting text from documents, documents are analyzed as **images**. Multi-modal models understand layout, text, and images simultaneously.
-
-| Tool | Description |
-|:-----|:------------|
-| **ColPali** | Open-source Vision-Language Model specifically for document retrieval; embeds document pages as images |
-
-</td></tr>
-</table>
-
-</details>
-
-<br>
+| Technique | Idea |
+|:----------|:-----|
+| **HyDE** | LLM generates a hypothetical answer &rarr; embed that instead of the question |
+| **Reverse HyDE** | At index time, generate hypothetical questions per chunk &rarr; match question-to-question |
+| **Multi-Query** | Rephrase user question into N variants, search each, deduplicate results |
 
 > [!TIP]
-> **Relevance for our Stack** &mdash; All approaches are open-source and can run locally or self-hosted. **Docling** is particularly promising as it combines OCR, table extraction, and structured chunking in one library. Extracted text and embeddings continue to be stored in Supabase/pgvector. For multi-modal retrieval (e.g. ColPali), treat this as an **advanced track** &mdash; feasible with Supabase, but needs a dedicated image-page embedding path and careful latency/cost benchmarking.
+> **Biggest bang for buck:** Hybrid Search (native PostgreSQL, no new infra) + swap in `mxbai-rerank-v2` for the LLM grader. HyDE/Multi-Query are quick LangChain add-ons.
 
 <br>
 
@@ -276,201 +168,55 @@ Instead of extracting text from documents, documents are analyzed as **images**.
 
 <br>
 
-## <img src="https://img.shields.io/badge/3-0055A4?style=for-the-badge" alt="3" height="24"> Research Area 3: Retrieval Improvements
+## 4 &mdash; Alternative Architectures
 
-> [!NOTE]
-> **Our retrieval is based exclusively on vector cosine similarity.** This works well for semantic search but fails for exact terms, technical terminology, and proper names. Several techniques can improve retrieval quality.
+> Longer-term approaches for use cases the current pipeline can't handle well.
 
-<br>
+### GraphRAG
 
-### Approaches
-
-<details open>
-<summary><h4>Hybrid Search <sub>(Vector + BM25)</sub></h4></summary>
-
-<table>
-<tr><td>
-
-Combines semantic vector search with keyword-based full-text search (BM25-style lexical ranking). Finds both conceptually similar **and** exactly matching documents. Results are merged using **Reciprocal Rank Fusion (RRF)**.
-
-```
-  Semantic Vector Search ──┐
-                           ├──► Reciprocal Rank Fusion (RRF) ──► Final Results
-  BM25 Full-Text Search ───┘
-```
-
-- **Supabase / PostgreSQL native** `tsvector` / `ts_rank` &mdash; built into PostgreSQL, zero additional dependencies
-- Preferred path for managed Supabase projects
-
-</td></tr>
-</table>
-
-</details>
-
-<details open>
-<summary><h4>Reranking</h4></summary>
-
-<table>
-<tr><td>
-
-After initial retrieval, results are **re-sorted by relevance** using a specialized cross-encoder model. Our existing `AzureGraderCompressor` in `db/reranker.py` uses a full LLM call per document, which is slow and expensive. Dedicated reranker models score query-document pairs in a single forward pass and typically add only **100&ndash;600ms** while improving retrieval accuracy by **15&ndash;40%**.
-
-| Model | License | Notes |
-|:------|:--------|:------|
-| **mxbai-rerank-v2** (Mixedbread) | ![](https://img.shields.io/badge/Apache_2.0-3ECF8E?style=flat-square) | Current SOTA, 0.5B/1.5B, 100+ languages, 8k context |
-| **BAAI/bge-reranker-v2-m3** | ![](https://img.shields.io/badge/Open--source-3ECF8E?style=flat-square) | Proven cross-encoder, good all-round performance |
-| **Jina Reranker v2** | ![](https://img.shields.io/badge/CC--BY--NC_4.0-FFAB00?style=flat-square) | Fast, multilingual, flash attention |
-| **FlashRank** | ![](https://img.shields.io/badge/Open--source-3ECF8E?style=flat-square) | ONNX-optimized, runs fast on CPU, no-GPU fallback |
-| **rerankers** (AnswerDotAI) | ![](https://img.shields.io/badge/Open--source-3ECF8E?style=flat-square) | Unified Python API, useful for rapid benchmarking |
-
-> **First step:** Replace the LLM-based grader with a dedicated cross-encoder and benchmark against the current pipeline.
-
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary><h4>HyDE <sub>(Hypothetical Document Embeddings)</sub></h4></summary>
-
-<table>
-<tr><td>
-
-Instead of embedding the user's question directly, an LLM first generates a **hypothetical answer**. This is then embedded and used for retrieval. The hypothetical answer is semantically closer to the actual documents than the question.
-
-```
-  User Question ──► LLM generates hypothetical answer ──► Embed answer ──► Retrieve
-```
-
-- Paper: *Precise Zero-Shot Dense Retrieval without Relevance Labels*
-
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary><h4>Reverse HyDE</h4></summary>
-
-<table>
-<tr><td>
-
-Conversely &mdash; for each chunk during **indexing**, a hypothetical question is generated that this chunk could answer. Retrieval then compares question with question.
-
-```
-  Chunk ──► LLM generates question ──► Embed question ──► Store
-  User Question ──► Embed ──► Match against stored questions
-```
-
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary><h4>Multi-Query Retrieval</h4></summary>
-
-<table>
-<tr><td>
-
-A single user question is reformulated into **several variants** by the LLM. Searching is performed separately for each variant, and results are merged and deduplicated. Increases recall, especially for ambiguous questions.
-
-- LangChain Docs: `MultiQueryRetriever`
-
-</td></tr>
-</table>
-
-</details>
-
-<br>
-
-> [!TIP]
-> **Relevance for our Stack** &mdash; **Hybrid Search** has the best effort-to-benefit ratio: Supabase/PostgreSQL already has native `tsvector` full-text search and `match_documents` can be extended without a separate search system. **Replacing the LLM-based grader** with `mxbai-rerank-v2` is a quick win &mdash; significantly faster and more effective than `AzureGraderCompressor`. HyDE and Multi-Query are simple LangChain extensions.
-
-<br>
-
----
-
-<br>
-
-## <img src="https://img.shields.io/badge/4-0055A4?style=for-the-badge" alt="4" height="24"> Research Area 4: Alternative Architectures
-
-> [!NOTE]
-> In addition to improvements to the existing pipeline, there are **fundamentally different approaches** that may be better suited for certain use cases.
-
-<br>
-
-### Approaches
-
-<details open>
-<summary><h4>GraphRAG / Knowledge Graphs</h4></summary>
-
-<table>
-<tr><td>
-
-Instead of (or in addition to) vectors, **knowledge graphs** are extracted from documents. Entities and their relationships are stored. Particularly good for questions requiring connections across multiple documents.
+Extract **knowledge graphs** from documents&mdash;entities and relationships. Excels at cross-document reasoning.
 
 ```mermaid
 graph LR
-    D[Document] --> E[Entity Extraction]
-    E --> N1((Entity A))
-    E --> N2((Entity B))
-    E --> N3((Entity C))
-    N1 -- "relates to" --> N2
-    N2 -- "depends on" --> N3
-    N1 -- "part of" --> N3
+    D["Documents"] --> EX["LLM Entity\nExtraction"]
+    EX --> A(("Entity A"))
+    EX --> B(("Entity B"))
+    EX --> C(("Entity C"))
+    A -- "relates to" --> B
+    B -- "depends on" --> C
+    A -- "part of" --> C
 
-    style D fill:#1a1a2e,stroke:#58A6FF,color:#fff
-    style E fill:#1a1a2e,stroke:#58A6FF,color:#fff
-    style N1 fill:#0055A4,stroke:#58A6FF,color:#fff
-    style N2 fill:#0055A4,stroke:#58A6FF,color:#fff
-    style N3 fill:#0055A4,stroke:#58A6FF,color:#fff
+    style D fill:#161b22,stroke:#30363d,color:#c9d1d9
+    style EX fill:#161b22,stroke:#58A6FF,color:#58A6FF
+    style A fill:#0055A4,stroke:#58A6FF,color:#fff
+    style B fill:#0055A4,stroke:#58A6FF,color:#fff
+    style C fill:#0055A4,stroke:#58A6FF,color:#fff
 ```
 
-- **Microsoft GraphRAG** &mdash; open-source framework, LLM-based entity and relation extraction
-- Paper: *From Local to Global &mdash; A Graph RAG Approach*
-- Can be persisted in standard PostgreSQL tables (recommended baseline)
-- High effort during indexing, but better answers for relationship-based questions
+- **Microsoft GraphRAG**&mdash;open-source, LLM-based extraction
+- Store in standard PostgreSQL tables (Apache AGE optional)
+- High indexing effort, but unlocks relationship-based Q&A
 
-</td></tr>
-</table>
+### RAPTOR
 
-</details>
-
-<details>
-<summary><h4>RAPTOR <sub>(Recursive Abstractive Processing for Tree-Organized Retrieval)</sub></h4></summary>
-
-<table>
-<tr><td>
-
-Document chunks are **summarized hierarchically**. A tree is created: original chunks at the bottom, increasingly abstract summaries above. Retrieval can take place at different abstraction levels.
+Summarize chunks into a **hierarchy tree**. Query at any abstraction level.
 
 ```
-            ┌──────────────────────┐
-            │   Global Summary     │  ◄── Most abstract
-            └──────────┬───────────┘
-               ┌───────┴───────┐
-         ┌─────┴─────┐   ┌────┴──────┐
-         │ Section A  │   │ Section B  │
-         └─────┬──────┘   └────┬──────┘
-          ┌────┴────┐      ┌───┴────┐
-        ┌─┴──┐ ┌──┴─┐  ┌──┴─┐ ┌──┴─┐
-        │ C1 │ │ C2 │  │ C3 │ │ C4 │  ◄── Original chunks
-        └────┘ └────┘  └────┘ └────┘
+             ┌──────────────┐
+             │ Global summary│
+             └──────┬───────┘
+            ┌───────┴───────┐
+      ┌─────┴─────┐   ┌────┴─────┐
+      │ Section A  │   │ Section B │
+      └──┬────┬───┘   └──┬───┬───┘
+       [C1] [C2]       [C3] [C4]    ← original chunks
 ```
 
-- Paper: *RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval*
-- Compatible with our existing `auto_summarize` feature
+- Compatible with existing `auto_summarize`
+- Store summaries + embeddings in Supabase alongside regular chunks
 
-</td></tr>
-</table>
-
-</details>
-
-<br>
-
-> [!TIP]
-> **Relevance for our Stack** &mdash; These approaches are more relevant in the **medium to long term**. Both RAPTOR and GraphRAG are open-source. A Supabase-compatible baseline stores summaries, graph nodes/edges, and embeddings in standard PostgreSQL tables; advanced graph extensions remain optional.
+> [!NOTE]
+> Both are open-source and Supabase-compatible. Start with standard PostgreSQL tables; graph extensions are optional.
 
 <br>
 
@@ -478,61 +224,29 @@ Document chunks are **summarized hierarchically**. A tree is created: original c
 
 <br>
 
-## <img src="https://img.shields.io/badge/5-0055A4?style=for-the-badge" alt="5" height="24"> Research Area 5: Evaluation & Benchmarking
+## 5 &mdash; Evaluation
 
 > [!WARNING]
-> **Without metrics, we cannot objectively assess whether changes improve or degrade the pipeline.** An evaluation framework should be set up **before** the other improvements are implemented.
+> **Set this up before implementing anything else.** Without metrics, you can't tell if a change helped or hurt.
 
-<br>
+### RAGAS
 
-### Approaches
+Standard RAG evaluation framework. Measures retrieval **and** generation.
 
-<details open>
-<summary><h4>RAGAS Framework</h4></summary>
+| Metric | What it measures |
+|:-------|:-----------------|
+| **Context Precision** | % of retrieved docs that are actually relevant |
+| **Context Recall** | % of relevant docs that were retrieved |
+| **Faithfulness** | Is the answer grounded in the source docs? |
+| **Answer Relevancy** | Does the answer address the actual question? |
 
-<table>
-<tr><td>
+### Golden Dataset
 
-The standard framework for evaluating RAG pipelines. It assesses both retrieval and generation quality.
+Build a manually curated test set: **50&ndash;100 question-answer pairs** with annotated source documents. This is the baseline everything gets measured against.
 
-- GitHub: `explodinggradients/ragas`
-
-</td></tr>
-</table>
-
-**Key Metrics:**
-
-| Metric | Measures | Question it Answers |
-|:-------|:---------|:--------------------|
-| **Context Precision** | ![](https://img.shields.io/badge/Retrieval-2962FF?style=flat-square) | How many of the retrieved documents are actually relevant? |
-| **Context Recall** | ![](https://img.shields.io/badge/Retrieval-2962FF?style=flat-square) | How many of the relevant documents were found? |
-| **Faithfulness** | ![](https://img.shields.io/badge/Generation-6B4C9A?style=flat-square) | Is the generated answer supported by the source documents? |
-| **Answer Relevancy** | ![](https://img.shields.io/badge/Generation-6B4C9A?style=flat-square) | Does the answer actually address the question that was asked? |
-
-</details>
-
-<details open>
-<summary><h4>Creating a Golden Dataset</h4></summary>
-
-<table>
-<tr><td>
-
-A manually curated dataset of question-answer pairs with associated source documents. This serves as the **foundation for all evaluations**.
-
-- [x] **50&ndash;100** question-answer pairs are a good starting point
-- [x] Questions should cover various difficulty levels and question types
-- [x] The expected source documents should be annotated
-- [x] RAGAS Docs: Test Set Generation
-
-</td></tr>
-</table>
-
-</details>
-
-<br>
-
-> [!IMPORTANT]
-> **Evaluation should be the first step** before other improvements are implemented. Only then can we measure the current state and quantify improvements. The golden dataset can be created using existing theme channels and documents.
+- Cover multiple difficulty levels and question types
+- Use existing theme channels and documents as source material
+- RAGAS can auto-generate test sets to bootstrap this
 
 <br>
 
@@ -540,56 +254,47 @@ A manually curated dataset of question-answer pairs with associated source docum
 
 <br>
 
-## &#x2601;&#xFE0F; Model Deployment Strategy (Cloud + Local)
+## &#x2601;&#xFE0F; Deployment Strategy
 
-> To keep flexibility, cost control, and data-sovereignty options, use a **hybrid model strategy**.
-
-<br>
+> Hybrid cloud + local. Supabase stays the single source of truth.
 
 ```mermaid
 graph TB
-    subgraph Strategy["HYBRID MODEL STRATEGY"]
-        direction TB
-
-        subgraph Embed["Embeddings (index + query)"]
-            E1["Cloud primary<br/>1024-dim schema"]
-            E2["Optional: Ollama /<br/>self-hosted"]
-        end
-
-        subgraph Gen["Generation (answering)"]
-            G1["Per-channel routing"]
-            G2["Cloud vs Local<br/>based on latency, privacy, quality"]
-        end
-
-        subgraph Rank["Reranking (grading)"]
-            R1["Prefer open-source<br/>on local / self-hosted"]
-            R2["Cloud reranking<br/>as fallback"]
-        end
+    subgraph cloud["Cloud Path"]
+        CE["Cloud Embeddings<br/>(1024-dim, primary)"]
+        CG["Cloud LLM<br/>(generation)"]
+        CR["Cloud Reranker<br/>(fallback)"]
     end
 
-    DB[("Supabase<br/>Single Source of Truth")]
+    subgraph local["Local / Self-hosted Path"]
+        LE["Ollama Embeddings<br/>(validated dims only)"]
+        LG["Local LLM<br/>(privacy-sensitive channels)"]
+        LR["Open-source Reranker<br/>(preferred)"]
+    end
 
-    Embed --> DB
-    Gen --> DB
-    Rank --> DB
+    CE & LE --> DB[("Supabase\npgvector")]
+    CG & LG --> DB
+    CR & LR --> DB
 
-    style Strategy fill:#0d1117,stroke:#58A6FF,color:#fff
-    style Embed fill:#1a1a2e,stroke:#3ECF8E,color:#fff
-    style Gen fill:#1a1a2e,stroke:#FFAB00,color:#fff
-    style Rank fill:#1a1a2e,stroke:#2962FF,color:#fff
+    style cloud fill:#161b22,stroke:#2962FF,color:#c9d1d9
+    style local fill:#161b22,stroke:#3ECF8E,color:#c9d1d9
     style DB fill:#0055A4,stroke:#58A6FF,color:#fff
-    style E1 fill:#0d1117,stroke:#3ECF8E,color:#c9d1d9
-    style E2 fill:#0d1117,stroke:#3ECF8E,color:#c9d1d9
-    style G1 fill:#0d1117,stroke:#FFAB00,color:#c9d1d9
-    style G2 fill:#0d1117,stroke:#FFAB00,color:#c9d1d9
-    style R1 fill:#0d1117,stroke:#2962FF,color:#c9d1d9
-    style R2 fill:#0d1117,stroke:#2962FF,color:#c9d1d9
+    style CE fill:#161b22,stroke:#2962FF,color:#c9d1d9
+    style CG fill:#161b22,stroke:#2962FF,color:#c9d1d9
+    style CR fill:#161b22,stroke:#2962FF,color:#c9d1d9
+    style LE fill:#161b22,stroke:#3ECF8E,color:#c9d1d9
+    style LG fill:#161b22,stroke:#3ECF8E,color:#c9d1d9
+    style LR fill:#161b22,stroke:#3ECF8E,color:#c9d1d9
 ```
 
-<br>
+| Layer | Primary | Local option |
+|:------|:--------|:-------------|
+| **Embeddings** | Cloud (1024-dim) | Ollama&mdash;only if dims and quality match |
+| **Generation** | Cloud LLM | Per-channel routing to local models for privacy/latency |
+| **Reranking** | Open-source local (preferred) | Cloud as fallback |
 
 > [!CAUTION]
-> **Note on local inference:** Self-hosted / local model deployment (e.g. via Ollama or on-premise GPU infrastructure) is only a realistic option for advanced or enterprise customers. The associated hardware and operational costs are only justifiable at scale. For standard customers, cloud-based inference endpoints remain the default path.
+> Local inference (Ollama, on-prem GPU) is realistic only for enterprise customers at scale. Standard customers should default to cloud endpoints.
 
 <br>
 
@@ -597,22 +302,20 @@ graph TB
 
 <br>
 
-## &#x1F3AF; Prioritization Roadmap
+## &#x1F3AF; Roadmap
 
-> Recommended order based on **effort vs. expected impact**.
+Ordered by **effort vs. impact**. Do evaluation early&mdash;you need a baseline before optimizing.
 
-<br>
-
-| # | Area | Effort | Impact | Reasoning |
-|:-:|:-----|:------:|:------:|:----------|
-| ![](https://img.shields.io/badge/P1-C62828?style=flat-square) | **Hybrid Search** (`tsvector` + Vector) | ![](https://img.shields.io/badge/Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/High-00C853?style=flat-square) | PostgreSQL has native support, `match_documents` can be extended |
-| ![](https://img.shields.io/badge/P2-D84315?style=flat-square) | **Semantic Chunking** | ![](https://img.shields.io/badge/Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/Medium-FFAB00?style=flat-square) | Replaces `RecursiveCharacterTextSplitter`, easily evaluable |
-| ![](https://img.shields.io/badge/P3-E65100?style=flat-square) | **OCR / Table & Structure Extraction** | ![](https://img.shields.io/badge/Med--High-FF6D00?style=flat-square) | ![](https://img.shields.io/badge/High-00C853?style=flat-square) | Docling + Tesseract/DocTR are open-source; unlocks unusable docs |
-| ![](https://img.shields.io/badge/P4-F57F17?style=flat-square) | **Integrate Reranking** | ![](https://img.shields.io/badge/Low-00C853?style=flat-square) | ![](https://img.shields.io/badge/Med--High-00C853?style=flat-square) | Replace LLM grader with cross-encoder; much faster & effective |
-| ![](https://img.shields.io/badge/P5-F9A825?style=flat-square) | **Establish Evaluation** (RAGAS + Golden Dataset) | ![](https://img.shields.io/badge/Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/Fundamental-2962FF?style=flat-square) | Cannot measure improvement without a baseline |
-| ![](https://img.shields.io/badge/P6-AFB42B?style=flat-square) | **Contextual Retrieval** | ![](https://img.shields.io/badge/Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/High-00C853?style=flat-square) | Chunk enrichment during indexing, no infra changes needed |
-| ![](https://img.shields.io/badge/P7-689F38?style=flat-square) | **HyDE / Multi-Query** | ![](https://img.shields.io/badge/Low-00C853?style=flat-square) | ![](https://img.shields.io/badge/Medium-FFAB00?style=flat-square) | LangChain modules, quickly prototyped |
-| ![](https://img.shields.io/badge/P8-2E7D32?style=flat-square) | **RAPTOR / GraphRAG** | ![](https://img.shields.io/badge/High-C62828?style=flat-square) | ![](https://img.shields.io/badge/Potentially_High-00C853?style=flat-square) | Fundamental research, long-term horizon |
+| | Area | Effort | Impact | Why |
+|:-:|:-----|:------:|:------:|:----|
+| ![](https://img.shields.io/badge/1-C62828?style=flat-square&labelColor=C62828) | **Hybrid Search** | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/-High-00C853?style=flat-square) | Native PostgreSQL `tsvector`, just extend `match_documents` |
+| ![](https://img.shields.io/badge/2-D84315?style=flat-square&labelColor=D84315) | **Semantic Chunking** | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | Drop-in replacement for `RecursiveCharacterTextSplitter` |
+| ![](https://img.shields.io/badge/3-E65100?style=flat-square&labelColor=E65100) | **OCR + Table Extraction** | ![](https://img.shields.io/badge/-Med--High-FF6D00?style=flat-square) | ![](https://img.shields.io/badge/-High-00C853?style=flat-square) | Unlocks scanned docs that currently return nothing |
+| ![](https://img.shields.io/badge/4-F57F17?style=flat-square&labelColor=F57F17) | **Reranking** | ![](https://img.shields.io/badge/-Low-00C853?style=flat-square) | ![](https://img.shields.io/badge/-Med--High-00C853?style=flat-square) | Swap `AzureGraderCompressor` &rarr; `mxbai-rerank-v2` |
+| ![](https://img.shields.io/badge/5-F9A825?style=flat-square&labelColor=F9A825) | **Evaluation** (RAGAS) | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/-Fundamental-2962FF?style=flat-square) | Can't improve what you can't measure |
+| ![](https://img.shields.io/badge/6-AFB42B?style=flat-square&labelColor=AFB42B) | **Contextual Retrieval** | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/-High-00C853?style=flat-square) | Enrich chunks at index time, no infra change |
+| ![](https://img.shields.io/badge/7-689F38?style=flat-square&labelColor=689F38) | **HyDE / Multi-Query** | ![](https://img.shields.io/badge/-Low-00C853?style=flat-square) | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | Quick LangChain prototypes |
+| ![](https://img.shields.io/badge/8-2E7D32?style=flat-square&labelColor=2E7D32) | **RAPTOR / GraphRAG** | ![](https://img.shields.io/badge/-High-C62828?style=flat-square) | ![](https://img.shields.io/badge/-Potentially_High-00C853?style=flat-square) | Long-term research track |
 
 <br>
 
@@ -622,92 +325,72 @@ graph TB
 
 ## &#x1F4DA; References
 
-<br>
-
 <details>
-<summary>&nbsp;&nbsp;<img src="https://img.shields.io/badge/General-555555?style=flat-square" alt="General">&nbsp;&nbsp;<b>General</b></summary>
-
+<summary><b>Chunking & Ingestion</b></summary>
 <br>
 
-| Resource |
-|:---------|
-| Building Enterprise AI: Hard-Won Lessons from 1200+ Hours of RAG Development (ByteVagabond) |
+- LangChain Text Splitters Documentation
+- Anthropic: Contextual Retrieval
+- Jina AI: Late Chunking
+- `chonkie` &mdash; Chunking Library
+- Docling (IBM)
+- Unstructured.io
+- LangChain: Parent Document Retriever
 
 </details>
 
 <details>
-<summary>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Chunking-0055A4?style=flat-square" alt="Chunking">&nbsp;&nbsp;<b>Chunking & Ingestion</b></summary>
-
+<summary><b>OCR & Multi-modal</b></summary>
 <br>
 
-| Resource |
-|:---------|
-| LangChain Text Splitters Documentation |
-| Anthropic: Contextual Retrieval |
-| Jina AI: Late Chunking |
-| `chonkie` &mdash; Chunking Library |
-| Docling (IBM) |
-| Unstructured.io Documentation |
-| LangChain: Parent Document Retriever |
+- Tesseract OCR
+- DocTR
+- Camelot &mdash; Table Extraction
+- ColPali
 
 </details>
 
 <details>
-<summary>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Multi--modal-3ECF8E?style=flat-square" alt="Multi-modal">&nbsp;&nbsp;<b>Multi-modal Ingestion</b></summary>
-
+<summary><b>Retrieval & Reranking</b></summary>
 <br>
 
-| Resource |
-|:---------|
-| Tesseract OCR |
-| DocTR |
-| Camelot &mdash; Table Extraction |
-| ColPali |
+- Supabase Full Text Search
+- LangChain: Hybrid Search
+- ColBERT
+- `mxbai-rerank-v2` (Mixedbread)
+- `rerankers` &mdash; Unified Reranker API (AnswerDotAI)
+- Agentset Reranker Leaderboard
+- Paper: HyDE &mdash; Precise Zero-Shot Dense Retrieval
+- LangChain: MultiQueryRetriever
 
 </details>
 
 <details>
-<summary>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Retrieval-2962FF?style=flat-square" alt="Retrieval">&nbsp;&nbsp;<b>Retrieval</b></summary>
-
+<summary><b>Alternative Architectures</b></summary>
 <br>
 
-| Resource |
-|:---------|
-| Supabase Full Text Search |
-| LangChain: Hybrid Search |
-| ColBERT |
-| `mxbai-rerank-v2` (Mixedbread) |
-| `rerankers` &mdash; Unified Reranker API (AnswerDotAI) |
-| Agentset Reranker Leaderboard |
-| Paper: HyDE &mdash; Precise Zero-Shot Dense Retrieval |
-| LangChain: MultiQueryRetriever |
+- Microsoft GraphRAG
+- Paper: From Local to Global &mdash; Graph RAG
+- Paper: RAPTOR
+- LangChain: RAPTOR Tutorial
 
 </details>
 
 <details>
-<summary>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Architectures-6B4C9A?style=flat-square" alt="Architectures">&nbsp;&nbsp;<b>Alternative Architectures</b></summary>
-
+<summary><b>Evaluation</b></summary>
 <br>
 
-| Resource |
-|:---------|
-| Microsoft GraphRAG |
-| Paper: From Local to Global &mdash; Graph RAG |
-| Paper: RAPTOR |
-| LangChain: RAPTOR Tutorial |
+- RAGAS Documentation
+- RAGAS GitHub (`explodinggradients/ragas`)
+- RAGAS: Test Set Generation
 
 </details>
 
 <details>
-<summary>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Evaluation-C62828?style=flat-square" alt="Evaluation">&nbsp;&nbsp;<b>Evaluation</b></summary>
-
+<summary><b>General</b></summary>
 <br>
 
-| Resource |
-|:---------|
-| RAGAS Documentation |
-| RAGAS GitHub |
-| RAGAS: Test Set Generation |
+- Building Enterprise AI: Hard-Won Lessons from 1200+ Hours of RAG Development (ByteVagabond)
 
 </details>
 
@@ -728,12 +411,8 @@ graph TB
    ╚═╝   ╚═╝     ╚═╝   ╚═╝
 ```
 
-**Business Solutions**
+**TMT | Business Solutions**
 
-<sub>INFOFLOW RAG Research &bull; 24.02.2026 &bull; Pages 1&ndash;15</sub>
-
-<br>
-
-[![Made with](https://img.shields.io/badge/Made_with-Research_&_Care-0055A4?style=flat-square)]()
+<sub>INFOFLOW RAG Research &bull; 24.02.2026</sub>
 
 </div>
