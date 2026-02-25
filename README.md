@@ -21,7 +21,9 @@ Step-by-step execution plan to improve chunking, ingestion, retrieval, and gener
 [![Supabase](https://img.shields.io/badge/Supabase-pgvector-3ECF8E?style=flat&logo=supabase&logoColor=white)]()&nbsp;
 [![LangChain](https://img.shields.io/badge/LangChain-Pipeline-1C3C3C?style=flat&logo=langchain&logoColor=white)]()&nbsp;
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-tsvector-4169E1?style=flat&logo=postgresql&logoColor=white)]()&nbsp;
-[![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)]()
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)]()&nbsp;
+[![LLM Agnostic](https://img.shields.io/badge/LLM-Agnostic-FF6D00?style=flat)]()&nbsp;
+[![OpenRouter](https://img.shields.io/badge/Eval-OpenRouter-6B4C9A?style=flat)]()
 
 <br>
 
@@ -35,13 +37,29 @@ Step-by-step execution plan to improve chunking, ingestion, retrieval, and gener
 
 <br>
 
+## About INFOFLOW
+
+INFOFLOW is a **B2B product** &mdash; TMT's customers feed their internal company files (contracts, reports, invoices, presentations, spreadsheets, scanned documents) into the system and need reliable retrieval over all of it. The document corpus is **diverse and unpredictable**: every customer has different file types, formats, and content.
+
+**Key constraints:**
+- **LLM-agnostic** &mdash; no hardcoded model dependencies. Must work with any provider (OpenAI, Azure, OpenRouter, Ollama, etc.)
+- **Embeddings** &mdash; OpenAI `text-embedding-3-large` (1024-dim)
+- **Eval budget** &mdash; lean. Evaluation LLM calls routed through **OpenRouter** using cost-efficient models
+- **Golden datasets can't be pre-built** &mdash; customer documents are unknown upfront. Use RAGAS auto-generation instead of manual curation.
+
+<br>
+
+---
+
+<br>
+
 ## Current Pipeline
 
 ```mermaid
 graph LR
     A["Documents"] --> B["PyPDFLoader"]
     B --> C["RecursiveCharacterTextSplitter\n(1000 chars)"]
-    C --> D["Embeddings\n(1024-dim)"]
+    C --> D["Embeddings\n(text-embedding-3-large)"]
     D --> E["Supabase pgvector"]
     E --> F["Cosine similarity"]
     F --> G["AzureGraderCompressor"]
@@ -96,15 +114,18 @@ Track progress across every phase. Fill in columns as each phase completes.
 
 ### Goal
 
-Establish quantitative baseline metrics for the current pipeline so every future change can be measured.
+Establish quantitative baseline metrics for the current pipeline so every future change can be measured. This must be **reusable per customer deployment** &mdash; not a one-time test.
 
 ### What to build
 
 | Step | Task | Details |
 |:----:|:-----|:--------|
-| 1 | **Golden Dataset** | Manually curate 50&ndash;100 question-answer pairs from real theme channels and documents. Cover multiple difficulty levels and question types. Annotate expected source documents. |
-| 2 | **RAGAS eval harness** | Wire `explodinggradients/ragas` into the existing pipeline. Configure all four core metrics. |
-| 3 | **Eval script** | Automated script that runs golden dataset against the pipeline and outputs a JSON/CSV scorecard. |
+| 1 | **Golden Dataset (auto-generated)** | Use **RAGAS Test Set Generation** to auto-generate QA pairs from whatever documents are in the customer's system. Customer data is unknown upfront &mdash; manual curation doesn't scale. Generate 50&ndash;100 pairs, then optionally hand-review a subset for quality. |
+| 2 | **RAGAS eval harness** | Wire `explodinggradients/ragas` into the existing pipeline. Configure all four core metrics. LLM calls for evaluation routed through **OpenRouter** (e.g. `deepseek/deepseek-chat`, `meta-llama/llama-3.1-70b-instruct`) to keep costs low. |
+| 3 | **Eval script** | Automated script that: (a) generates golden dataset from current docs, (b) runs it against the pipeline, (c) outputs a JSON/CSV scorecard. Must be re-runnable per customer and per phase. |
+
+> [!NOTE]
+> **Why auto-generated?** INFOFLOW serves B2B customers with diverse, unpredictable internal files. You can't hand-craft QA pairs for documents you haven't seen. RAGAS Test Set Generation creates synthetic QA pairs directly from the indexed documents, covering simple factual, multi-hop, and reasoning questions.
 
 ### RAGAS Metrics
 
@@ -117,7 +138,24 @@ Establish quantitative baseline metrics for the current pipeline so every future
 
 ### Tools
 
-`explodinggradients/ragas` &middot; RAGAS Test Set Generation (for bootstrapping) &middot; Existing Supabase pipeline
+`explodinggradients/ragas` &middot; RAGAS Test Set Generation &middot; OpenRouter (eval LLM) &middot; Existing Supabase pipeline
+
+### LLM-agnostic design
+
+The eval harness must not be locked to any specific LLM provider. Use a config-driven approach:
+
+```
+# eval_config.yaml (example)
+eval_llm:
+  provider: openrouter          # or: openai, azure, ollama
+  model: deepseek/deepseek-chat # cheap, good enough for eval
+  api_key: ${OPENROUTER_API_KEY}
+
+embeddings:
+  provider: openai
+  model: text-embedding-3-large
+  dimensions: 1024
+```
 
 ### How to verify
 
@@ -128,12 +166,13 @@ Establish quantitative baseline metrics for the current pipeline so every future
 
 ### Expected outcome
 
-A reproducible baseline scorecard. Likely: low Context Recall (vector-only search misses keywords), high latency (LLM-based reranker), moderate Faithfulness.
+A reproducible, reusable baseline scorecard. Likely: low Context Recall (vector-only search misses keywords), high latency (LLM-based reranker), moderate Faithfulness.
 
 ### Definition of done
 
-- [ ] Golden dataset committed (50&ndash;100 QA pairs)
-- [ ] Eval script runs end-to-end
+- [ ] Auto-generated golden dataset committed (50&ndash;100 QA pairs)
+- [ ] Eval script runs end-to-end with OpenRouter
+- [ ] Script is re-runnable per customer deployment
 - [ ] Baseline scorecard filled in
 - [ ] Results stored in `results/` directory
 
@@ -272,7 +311,7 @@ Replace `PyPDFLoader` with a pipeline that handles scans, images, and tables.
 
 ### 2c &mdash; Contextual Retrieval
 
-Enrich each chunk at index time with a short LLM-generated context prefix explaining where the chunk sits in the overall document. Prepend to chunk text before embedding.
+Enrich each chunk at index time with a short LLM-generated context prefix explaining where the chunk sits in the overall document. Prepend to chunk text before embedding. The LLM used for prefix generation is config-driven &mdash; use a cheap, fast model (this is a batch operation at index time, not real-time).
 
 > According to Anthropic, this reduces "failed retrievals" by up to **49%**. Combinable with BM25 and reranking from Phase 1.
 
@@ -462,7 +501,7 @@ graph LR
     A["Documents"] --> B["Docling\n(OCR + Tables)"]
     B --> C["Semantic / Structure\nChunker"]
     C --> C2["Contextual\nPrefix (LLM)"]
-    C2 --> D["Embeddings\n(1024-dim)"]
+    C2 --> D["Embeddings\n(text-embedding-3-large)"]
     D --> E["Supabase pgvector"]
     E --> F1["Vector Search"]
     E --> F2["BM25 tsvector"]
@@ -529,14 +568,18 @@ graph TB
 
 | Layer | Primary | Local option |
 |:------|:--------|:-------------|
-| **Embeddings** | Cloud (1024-dim) | Ollama &mdash; only if dims and quality match |
-| **Generation** | Cloud LLM | Per-channel routing to local models for privacy/latency |
+| **Embeddings** | OpenAI `text-embedding-3-large` (1024-dim) | Ollama &mdash; only if dims and quality match |
+| **Generation** | Config-driven (OpenAI / Azure / OpenRouter / Ollama) | Per-channel routing for privacy/latency |
 | **Reranking** | Open-source local (preferred) | Cloud as fallback |
+| **Evaluation** | OpenRouter (cost-efficient models) | Any provider via config |
+
+**LLM-agnostic design:** All LLM calls go through a provider abstraction layer. Swap models via config, not code changes. Customers can use whichever provider fits their requirements.
 
 **Phase-specific deployment notes:**
+- **Phase 0** (Eval): OpenRouter with cheap models (`deepseek-chat`, `llama-3.1-70b`) for RAGAS evaluation.
 - **Phase 1** (Reranking): Prefer local open-source reranker. Cloud as fallback.
 - **Phase 2** (OCR): Docling runs locally. Google Document AI is the cloud option for scale.
-- **Phase 3** (HyDE): Uses whichever LLM path (cloud or local) is configured for generation.
+- **Phase 3** (HyDE): Uses whichever LLM path is configured for generation.
 
 > [!CAUTION]
 > Local inference (Ollama, on-prem GPU) is realistic only for enterprise customers at scale. Standard customers should default to cloud endpoints.
