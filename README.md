@@ -14,7 +14,7 @@
 
 <br><br>
 
-Improving chunking, ingestion, retrieval, and generation<br>for the INFOFLOW RAG pipeline on **Supabase + LangChain**.
+Step-by-step execution plan to improve chunking, ingestion, retrieval, and generation<br>for the INFOFLOW RAG pipeline on **Supabase + LangChain**.
 
 <br>
 
@@ -27,7 +27,7 @@ Improving chunking, ingestion, retrieval, and generation<br>for the INFOFLOW RAG
 
 ---
 
-**[Chunking](#1--chunking)** · **[Multi-modal](#2--multi-modal-ingestion)** · **[Retrieval](#3--retrieval)** · **[Architectures](#4--alternative-architectures)** · **[Evaluation](#5--evaluation)** · **[Deployment](#-deployment-strategy)** · **[Roadmap](#-roadmap)**
+**[Current Pipeline](#current-pipeline)** · **[Phase 0: Baseline](#phase-0--baseline--evaluation)** · **[Phase 1: Search](#phase-1--hybrid-search--reranking)** · **[Phase 2: Ingestion](#phase-2--ingestion--chunking)** · **[Phase 3: Query](#phase-3--query-intelligence)** · **[Phase 4: Architecture](#phase-4--advanced-architectures)** · **[Target Pipeline](#target-pipeline)** · **[Deployment](#%EF%B8%8F-deployment-strategy)**
 
 ---
 
@@ -35,7 +35,7 @@ Improving chunking, ingestion, retrieval, and generation<br>for the INFOFLOW RAG
 
 <br>
 
-## Current pipeline
+## Current Pipeline
 
 ```mermaid
 graph LR
@@ -57,7 +57,7 @@ graph LR
     style H fill:#161b22,stroke:#30363d,color:#c9d1d9
 ```
 
-<sup>Red = bottleneck this research addresses.</sup>
+<sup>Red = bottleneck this plan addresses.</sup>
 
 **Problems:** Fixed 1000-char chunking ignores semantics. No OCR for scans. Vector-only retrieval misses keyword matches. LLM-based reranker is slow and expensive.
 
@@ -67,55 +67,22 @@ graph LR
 
 <br>
 
-## 1 &mdash; Chunking
+## Scorecard
 
-> Current: `RecursiveCharacterTextSplitter` at 1000 chars. Cuts mid-sentence, ignores document structure.
+Track progress across every phase. Fill in columns as each phase completes.
 
-| Approach | How it works | Tools |
-|:---------|:-------------|:------|
-| **Semantic Chunking** | Split where embedding similarity between sentences drops below threshold | `LangChain SemanticChunker`, `LlamaIndex SemanticSplitterNodeParser`, `chonkie` |
-| **Late Chunking** | Embed full document first, then pool token embeddings into chunks&mdash;context bleeds across boundaries | `jina-embeddings-v2` |
-| **Structure-aware** | Use headings/paragraphs/tables as natural chunk boundaries | `Docling` (IBM), `Unstructured.io` |
-| **Contextual Retrieval** | Prepend each chunk with a short LLM-generated context prefix at index time. Reduces failed retrievals by **~49%** (Anthropic) | Anthropic Blog; combinable with BM25 |
-| **Parent-Child** | Small chunks for retrieval precision, return the larger parent chunk to the LLM for more context | `LangChain ParentDocumentRetriever` |
+| Metric | Baseline (Phase 0) | After Phase 1 | After Phase 2 | After Phase 3 | After Phase 4 |
+|:-------|:-------------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+| **Context Precision** | _TBD_ | | | | |
+| **Context Recall** | _TBD_ | | | | |
+| **Faithfulness** | _TBD_ | | | | |
+| **Answer Relevancy** | _TBD_ | | | | |
+| **Latency p50 (ms)** | _TBD_ | | | | |
+| **Latency p95 (ms)** | _TBD_ | | | | |
+| **Cost per query** | _TBD_ | | | | |
 
-> [!TIP]
-> **Quick wins:** Semantic Chunking and Contextual Retrieval drop in without changing Supabase schema. Structure-aware chunking is high-value for PDFs with complex layouts.
-
-<br>
-
----
-
-<br>
-
-## 2 &mdash; Multi-modal Ingestion
-
-> Current: `PyPDFLoader` extracts embedded text only. Scanned pages, images, and tables return nothing.
-
-### OCR
-
-| Tool | Type | Best for |
-|:-----|:-----|:---------|
-| **Tesseract** | ![](https://img.shields.io/badge/local-3ECF8E?style=flat-square) | Simple text, fast setup |
-| **DocTR** | ![](https://img.shields.io/badge/local-3ECF8E?style=flat-square) | Complex layouts, deep-learning based |
-| **Google Document AI** | ![](https://img.shields.io/badge/cloud-2962FF?style=flat-square) | 200+ printed / 50+ handwritten languages |
-
-### Tables
-
-| Tool | Notes |
-|:-----|:------|
-| **Docling + TableFormer** | DL-based table recognition + structured chunking in one library |
-| **Camelot** | Python-native, PDF tables specifically |
-| **Unstructured.io** | Extracts tables as structured elements |
-
-### Visual understanding
-
-| Tool | Notes |
-|:-----|:------|
-| **ColPali** | Vision-Language model that embeds document pages as images. Advanced track&mdash;needs dedicated embedding path. |
-
-> [!TIP]
-> **Recommendation:** Start with **Docling**&mdash;it handles OCR, tables, and structured chunking in a single open-source library. Everything stores back into Supabase/pgvector as before.
+> [!IMPORTANT]
+> **Gate rule:** No phase is considered complete until the eval script is re-run and the scorecard is updated. If a change doesn't improve at least one metric without regressing others, it gets reverted.
 
 <br>
 
@@ -123,25 +90,91 @@ graph LR
 
 <br>
 
-## 3 &mdash; Retrieval
+## Phase 0 &mdash; Baseline & Evaluation
 
-> Current: Vector cosine similarity only. Misses exact terms, technical jargon, and proper names.
+> **Do this first.** Every phase below is measured against the baseline established here.
 
-### Hybrid Search (Vector + BM25)
+### Goal
 
-Combine semantic vectors with PostgreSQL full-text search. Merge results via **Reciprocal Rank Fusion**.
+Establish quantitative baseline metrics for the current pipeline so every future change can be measured.
+
+### What to build
+
+| Step | Task | Details |
+|:----:|:-----|:--------|
+| 1 | **Golden Dataset** | Manually curate 50&ndash;100 question-answer pairs from real theme channels and documents. Cover multiple difficulty levels and question types. Annotate expected source documents. |
+| 2 | **RAGAS eval harness** | Wire `explodinggradients/ragas` into the existing pipeline. Configure all four core metrics. |
+| 3 | **Eval script** | Automated script that runs golden dataset against the pipeline and outputs a JSON/CSV scorecard. |
+
+### RAGAS Metrics
+
+| Metric | What it measures |
+|:-------|:-----------------|
+| **Context Precision** | % of retrieved docs that are actually relevant |
+| **Context Recall** | % of relevant docs that were retrieved |
+| **Faithfulness** | Is the answer grounded in the source docs? |
+| **Answer Relevancy** | Does the answer address the actual question? |
+
+### Tools
+
+`explodinggradients/ragas` &middot; RAGAS Test Set Generation (for bootstrapping) &middot; Existing Supabase pipeline
+
+### How to verify
+
+1. Run the eval script on the **current unmodified pipeline**
+2. Record all four RAGAS scores + latency (p50, p95) + cost per query
+3. Fill in the "Baseline" column of the scorecard above
+4. Commit golden dataset and eval script to repo
+
+### Expected outcome
+
+A reproducible baseline scorecard. Likely: low Context Recall (vector-only search misses keywords), high latency (LLM-based reranker), moderate Faithfulness.
+
+### Definition of done
+
+- [ ] Golden dataset committed (50&ndash;100 QA pairs)
+- [ ] Eval script runs end-to-end
+- [ ] Baseline scorecard filled in
+- [ ] Results stored in `results/` directory
+
+<br>
+
+---
+
+<br>
+
+## Phase 1 &mdash; Hybrid Search & Reranking
+
+> Fix the retrieval bottleneck first. These changes work on **existing data** &mdash; no re-ingestion needed.
+
+### Goal
+
+Combine semantic and keyword search. Replace the slow LLM-based reranker with a dedicated cross-encoder.
+
+### 1a &mdash; Hybrid Search
+
+Add BM25 full-text search alongside vector search. Merge results via **Reciprocal Rank Fusion (RRF)**.
 
 ```
-  Vector search  ─┐
-                   ├─► RRF merge ─► Final ranked results
-  BM25 (tsvector) ─┘
+  Vector cosine search  ─┐
+                          ├─► RRF merge ─► Ranked results
+  BM25 tsvector search  ─┘
 ```
 
-Zero new dependencies&mdash;`tsvector` / `ts_rank` are built into PostgreSQL. Extend `match_documents` and you're done.
+**Implementation:**
 
-### Reranking
+| Step | Task |
+|:----:|:-----|
+| 1 | Add `tsvector` column + GIN index to documents table |
+| 2 | Create `ts_rank` scoring query |
+| 3 | Implement RRF merge in `match_documents` |
+| 4 | Run eval &mdash; compare against baseline |
 
-Replace `AzureGraderCompressor` (full LLM call per doc) with a dedicated cross-encoder. Single forward pass, **100&ndash;600ms** added latency, **15&ndash;40% accuracy gain**.
+Zero new dependencies &mdash; `tsvector` / `ts_rank` are built into PostgreSQL.
+
+### 1b &mdash; Reranker Swap
+
+Replace `AzureGraderCompressor` (full LLM call per doc) with a dedicated cross-encoder. Single forward pass, **100&ndash;600ms** latency, **15&ndash;40% accuracy gain**.
 
 | Model | License | Specs |
 |:------|:-------:|:------|
@@ -151,16 +184,38 @@ Replace `AzureGraderCompressor` (full LLM call per doc) with a dedicated cross-e
 | **FlashRank** | ![](https://img.shields.io/badge/Apache_2.0-3ECF8E?style=flat-square) | ONNX, runs on CPU, no-GPU fallback |
 | **rerankers** | ![](https://img.shields.io/badge/Apache_2.0-3ECF8E?style=flat-square) | Unified API across all models above |
 
-### Query expansion
+**Implementation:**
 
-| Technique | Idea |
-|:----------|:-----|
-| **HyDE** | LLM generates a hypothetical answer &rarr; embed that instead of the question |
-| **Reverse HyDE** | At index time, generate hypothetical questions per chunk &rarr; match question-to-question |
-| **Multi-Query** | Rephrase user question into N variants, search each, deduplicate results |
+| Step | Task |
+|:----:|:-----|
+| 1 | Install `rerankers` package |
+| 2 | Load `mxbai-rerank-v2` (or `FlashRank` for CPU-only) |
+| 3 | Replace `AzureGraderCompressor` call in `db/reranker.py` |
+| 4 | Benchmark latency before/after |
+
+### How to verify
+
+1. Re-run Phase 0 eval script
+2. Compare Context Precision and Context Recall vs. baseline
+3. Measure latency reduction from reranker swap
+4. Fill in "After Phase 1" column in scorecard
+
+### Metrics to watch
+
+| Metric | Expected change |
+|:-------|:----------------|
+| Context Precision | +15&ndash;25% (reranker sorts better) |
+| Context Recall | Significant jump (BM25 catches keyword matches) |
+| Latency p50 | 2&ndash;5x faster (cross-encoder vs full LLM call) |
+
+### Definition of done
+
+- [ ] Hybrid search returns results for keyword-heavy queries that previously failed
+- [ ] Reranker latency under 600ms (was full LLM call)
+- [ ] Scorecard updated, no metric regressions
 
 > [!TIP]
-> **Biggest bang for buck:** Hybrid Search (native PostgreSQL, no new infra) + swap in `mxbai-rerank-v2` for the LLM grader. HyDE/Multi-Query are quick LangChain add-ons.
+> **Biggest bang for buck.** Hybrid Search is native PostgreSQL &mdash; no new infra. The reranker swap is a single function replacement. Together they fix two of the four red bottlenecks.
 
 <br>
 
@@ -168,13 +223,163 @@ Replace `AzureGraderCompressor` (full LLM call per doc) with a dedicated cross-e
 
 <br>
 
-## 4 &mdash; Alternative Architectures
+## Phase 2 &mdash; Ingestion & Chunking
 
-> Longer-term approaches for use cases the current pipeline can't handle well.
+> Now improve the data itself. These changes require re-indexing, so **batch them together** to avoid re-processing documents multiple times.
 
-### GraphRAG
+### Goal
 
-Extract **knowledge graphs** from documents&mdash;entities and relationships. Excels at cross-document reasoning.
+Replace fixed-size chunking with semantic/structure-aware splitting. Unlock scanned documents and tables. Enrich chunks with contextual prefixes.
+
+### 2a &mdash; Semantic Chunking
+
+Replace `RecursiveCharacterTextSplitter` (1000 chars) with chunking that respects meaning.
+
+| Approach | How it works | Tool |
+|:---------|:-------------|:-----|
+| **Semantic Chunking** | Split where embedding similarity between sentences drops below threshold | `LangChain SemanticChunker`, `chonkie` |
+| **Structure-aware** | Use headings/paragraphs/tables as natural boundaries | `Docling` (IBM), `Unstructured.io` |
+| **Parent-Child** | Small chunks for retrieval precision, return parent chunk to LLM for context | `LangChain ParentDocumentRetriever` |
+
+### 2b &mdash; Multi-modal Ingestion (OCR + Tables)
+
+Replace `PyPDFLoader` with a pipeline that handles scans, images, and tables.
+
+**OCR:**
+
+| Tool | Type | Best for |
+|:-----|:-----|:---------|
+| **Tesseract** | ![](https://img.shields.io/badge/local-3ECF8E?style=flat-square) | Simple text, fast setup |
+| **DocTR** | ![](https://img.shields.io/badge/local-3ECF8E?style=flat-square) | Complex layouts, deep-learning based |
+| **Google Document AI** | ![](https://img.shields.io/badge/cloud-2962FF?style=flat-square) | 200+ printed / 50+ handwritten languages |
+
+**Tables:**
+
+| Tool | Notes |
+|:-----|:------|
+| **Docling + TableFormer** | DL-based table recognition + structured chunking in one library |
+| **Camelot** | Python-native, PDF tables specifically |
+| **Unstructured.io** | Extracts tables as structured elements |
+
+**Visual Understanding:**
+
+| Tool | Notes |
+|:-----|:------|
+| **ColPali** | Vision-Language model, embeds pages as images. Advanced track &mdash; needs dedicated embedding path. |
+
+> [!TIP]
+> **Recommendation:** Start with **Docling** &mdash; it handles OCR, tables, and structured chunking in a single open-source library.
+
+### 2c &mdash; Contextual Retrieval
+
+Enrich each chunk at index time with a short LLM-generated context prefix explaining where the chunk sits in the overall document. Prepend to chunk text before embedding.
+
+> According to Anthropic, this reduces "failed retrievals" by up to **49%**. Combinable with BM25 and reranking from Phase 1.
+
+### Implementation (batched)
+
+| Step | Task |
+|:----:|:-----|
+| 1 | Replace `PyPDFLoader` with Docling pipeline (OCR + tables + structure) |
+| 2 | Replace `RecursiveCharacterTextSplitter` with `SemanticChunker` or Docling structure-aware splitter |
+| 3 | For each chunk, generate contextual prefix via LLM and prepend before embedding |
+| 4 | Re-embed and re-index all documents in one pass |
+| 5 | Run eval |
+
+### How to verify
+
+1. Test on scanned documents that previously returned empty results &mdash; they should now be searchable
+2. Spot-check that chunks no longer cut mid-sentence
+3. Re-run Phase 0 eval script, compare Context Recall
+4. Fill in "After Phase 2" column in scorecard
+
+### Metrics to watch
+
+| Metric | Expected change |
+|:-------|:----------------|
+| Context Recall | Large jump on previously-invisible document types |
+| Faithfulness | Better chunks = better grounding |
+| Context Precision | Contextual prefixes improve embedding quality |
+
+### Definition of done
+
+- [ ] Scanned PDFs and tables are searchable
+- [ ] Chunks respect semantic boundaries (spot-check)
+- [ ] Scorecard updated, no regressions on simple queries
+
+<br>
+
+---
+
+<br>
+
+## Phase 3 &mdash; Query Intelligence
+
+> Enhance how queries are formulated **before** they hit the retrieval pipeline. Query-time only &mdash; no re-indexing.
+
+### Goal
+
+Improve handling of vague, ambiguous, and poorly-worded queries through expansion and reformulation.
+
+### Techniques
+
+| Technique | How it works | Trade-off |
+|:----------|:-------------|:----------|
+| **HyDE** | LLM generates a hypothetical answer &rarr; embed that instead of the raw question | Adds 1 LLM call per query |
+| **Reverse HyDE** | At index time, generate hypothetical questions per chunk &rarr; match question-to-question | Requires re-index (batch with Phase 2 if possible) |
+| **Multi-Query** | Rephrase user question into N variants, search each, deduplicate results | Multiplies retrieval calls by N |
+| **Late Chunking** | Embed full document first with long-context model, then pool into chunks | Requires `jina-embeddings-v2` |
+
+### Implementation
+
+| Step | Task |
+|:----:|:-----|
+| 1 | Start with **Multi-Query** &mdash; cheapest, often sufficient (`LangChain MultiQueryRetriever`) |
+| 2 | Add **HyDE** for domain-specific jargon queries (`LangChain HypotheticalDocumentEmbedder`) |
+| 3 | A/B test each technique: measure improvement vs. added latency |
+| 4 | If cost allows, combine Multi-Query + HyDE |
+
+### How to verify
+
+1. Build a test set of vague/ambiguous queries the current pipeline handles poorly
+2. Run with and without each technique, compare retrieval scores
+3. Measure latency impact (HyDE adds an LLM call)
+4. Fill in "After Phase 3" column in scorecard
+
+### Metrics to watch
+
+| Metric | Expected change |
+|:-------|:----------------|
+| Context Recall | Improved for difficult/vague queries |
+| Answer Relevancy | Better context = better answers |
+| Latency p50 | Monitor &mdash; HyDE adds latency |
+
+### Definition of done
+
+- [ ] Ambiguous queries return more relevant results
+- [ ] Latency increase is acceptable (documented)
+- [ ] Scorecard updated
+
+> [!NOTE]
+> **Cost check:** HyDE adds one LLM call per query. If cost is a concern, Multi-Query alone is often sufficient and much cheaper.
+
+<br>
+
+---
+
+<br>
+
+## Phase 4 &mdash; Advanced Architectures
+
+> Long-term research track. Only pursue after **Phases 0&ndash;3 are stable and measured.**
+
+### Goal
+
+Explore architectures that go beyond standard vector retrieval for cross-document reasoning and hierarchical understanding.
+
+### 4a &mdash; GraphRAG
+
+Extract **knowledge graphs** from documents &mdash; entities and relationships. Excels at cross-document reasoning ("How does X relate to Y across these 5 reports?").
 
 ```mermaid
 graph LR
@@ -193,13 +398,16 @@ graph LR
     style C fill:#0055A4,stroke:#58A6FF,color:#fff
 ```
 
-- **Microsoft GraphRAG**&mdash;open-source, LLM-based extraction
+- **Microsoft GraphRAG** &mdash; open-source, LLM-based entity extraction
 - Store in standard PostgreSQL tables (Apache AGE optional)
-- High indexing effort, but unlocks relationship-based Q&A
+- High indexing cost (many LLM calls for extraction)
 
-### RAPTOR
+**When to use:** Cross-document Q&A, entity relationships, multi-hop reasoning.
+**When NOT to use:** Simple factual lookup &mdash; standard RAG from Phases 1&ndash;3 is sufficient.
 
-Summarize chunks into a **hierarchy tree**. Query at any abstraction level.
+### 4b &mdash; RAPTOR
+
+Summarize chunks into a **hierarchy tree**. Query at any abstraction level &mdash; from specific detail to global overview.
 
 ```
              ┌──────────────┐
@@ -212,11 +420,32 @@ Summarize chunks into a **hierarchy tree**. Query at any abstraction level.
        [C1] [C2]       [C3] [C4]    ← original chunks
 ```
 
-- Compatible with existing `auto_summarize`
+- Compatible with existing `auto_summarize` feature
 - Store summaries + embeddings in Supabase alongside regular chunks
 
-> [!NOTE]
-> Both are open-source and Supabase-compatible. Start with standard PostgreSQL tables; graph extensions are optional.
+### How to verify
+
+1. Build a test set of cross-document and multi-hop questions the current pipeline cannot answer
+2. Implement GraphRAG on a document subset first &mdash; measure cost before scaling
+3. Run full RAGAS eval to check for regressions on simple queries
+4. Fill in "After Phase 4" column in scorecard
+
+### Metrics to watch
+
+| Metric | Expected change |
+|:-------|:----------------|
+| Answer Relevancy | Improved on cross-document questions |
+| Indexing time/cost | High &mdash; document the increase |
+| All RAGAS metrics | Should not regress on simple queries |
+
+### Definition of done
+
+- [ ] Cross-document questions get correct answers
+- [ ] Indexing cost is documented and acceptable
+- [ ] Scorecard updated, no regressions
+
+> [!CAUTION]
+> **GraphRAG indexing is expensive** (many LLM calls for entity extraction). Run a cost estimate on a document subset before committing to full indexing.
 
 <br>
 
@@ -224,29 +453,40 @@ Summarize chunks into a **hierarchy tree**. Query at any abstraction level.
 
 <br>
 
-## 5 &mdash; Evaluation
+## Target Pipeline
 
-> [!WARNING]
-> **Set this up before implementing anything else.** Without metrics, you can't tell if a change helped or hurt.
+After all phases, the pipeline looks like this:
 
-### RAGAS
+```mermaid
+graph LR
+    A["Documents"] --> B["Docling\n(OCR + Tables)"]
+    B --> C["Semantic / Structure\nChunker"]
+    C --> C2["Contextual\nPrefix (LLM)"]
+    C2 --> D["Embeddings\n(1024-dim)"]
+    D --> E["Supabase pgvector"]
+    E --> F1["Vector Search"]
+    E --> F2["BM25 tsvector"]
+    F1 --> RRF["RRF Merge"]
+    F2 --> RRF
+    RRF --> G["Cross-encoder\nReranker"]
+    G --> H["LLM Response"]
 
-Standard RAG evaluation framework. Measures retrieval **and** generation.
+    style A fill:#161b22,stroke:#30363d,color:#c9d1d9
+    style B fill:#161b22,stroke:#3ECF8E,color:#3ECF8E
+    style C fill:#161b22,stroke:#3ECF8E,color:#3ECF8E
+    style C2 fill:#161b22,stroke:#3ECF8E,color:#3ECF8E
+    style D fill:#161b22,stroke:#30363d,color:#c9d1d9
+    style E fill:#161b22,stroke:#3ECF8E,color:#3ECF8E
+    style F1 fill:#161b22,stroke:#3ECF8E,color:#3ECF8E
+    style F2 fill:#161b22,stroke:#3ECF8E,color:#3ECF8E
+    style RRF fill:#161b22,stroke:#3ECF8E,color:#3ECF8E
+    style G fill:#161b22,stroke:#3ECF8E,color:#3ECF8E
+    style H fill:#161b22,stroke:#30363d,color:#c9d1d9
+```
 
-| Metric | What it measures |
-|:-------|:-----------------|
-| **Context Precision** | % of retrieved docs that are actually relevant |
-| **Context Recall** | % of relevant docs that were retrieved |
-| **Faithfulness** | Is the answer grounded in the source docs? |
-| **Answer Relevancy** | Does the answer address the actual question? |
+<sup>Green = improved component.</sup>
 
-### Golden Dataset
-
-Build a manually curated test set: **50&ndash;100 question-answer pairs** with annotated source documents. This is the baseline everything gets measured against.
-
-- Cover multiple difficulty levels and question types
-- Use existing theme channels and documents as source material
-- RAGAS can auto-generate test sets to bootstrap this
+Compare with the [current pipeline](#current-pipeline) above &mdash; every red bottleneck is resolved.
 
 <br>
 
@@ -289,33 +529,17 @@ graph TB
 
 | Layer | Primary | Local option |
 |:------|:--------|:-------------|
-| **Embeddings** | Cloud (1024-dim) | Ollama&mdash;only if dims and quality match |
+| **Embeddings** | Cloud (1024-dim) | Ollama &mdash; only if dims and quality match |
 | **Generation** | Cloud LLM | Per-channel routing to local models for privacy/latency |
 | **Reranking** | Open-source local (preferred) | Cloud as fallback |
 
+**Phase-specific deployment notes:**
+- **Phase 1** (Reranking): Prefer local open-source reranker. Cloud as fallback.
+- **Phase 2** (OCR): Docling runs locally. Google Document AI is the cloud option for scale.
+- **Phase 3** (HyDE): Uses whichever LLM path (cloud or local) is configured for generation.
+
 > [!CAUTION]
 > Local inference (Ollama, on-prem GPU) is realistic only for enterprise customers at scale. Standard customers should default to cloud endpoints.
-
-<br>
-
----
-
-<br>
-
-## &#x1F3AF; Roadmap
-
-Ordered by **effort vs. impact**. Do evaluation early&mdash;you need a baseline before optimizing.
-
-| | Area | Effort | Impact | Why |
-|:-:|:-----|:------:|:------:|:----|
-| ![](https://img.shields.io/badge/1-C62828?style=flat-square&labelColor=C62828) | **Hybrid Search** | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/-High-00C853?style=flat-square) | Native PostgreSQL `tsvector`, just extend `match_documents` |
-| ![](https://img.shields.io/badge/2-D84315?style=flat-square&labelColor=D84315) | **Semantic Chunking** | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | Drop-in replacement for `RecursiveCharacterTextSplitter` |
-| ![](https://img.shields.io/badge/3-E65100?style=flat-square&labelColor=E65100) | **OCR + Table Extraction** | ![](https://img.shields.io/badge/-Med--High-FF6D00?style=flat-square) | ![](https://img.shields.io/badge/-High-00C853?style=flat-square) | Unlocks scanned docs that currently return nothing |
-| ![](https://img.shields.io/badge/4-F57F17?style=flat-square&labelColor=F57F17) | **Reranking** | ![](https://img.shields.io/badge/-Low-00C853?style=flat-square) | ![](https://img.shields.io/badge/-Med--High-00C853?style=flat-square) | Swap `AzureGraderCompressor` &rarr; `mxbai-rerank-v2` |
-| ![](https://img.shields.io/badge/5-F9A825?style=flat-square&labelColor=F9A825) | **Evaluation** (RAGAS) | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/-Fundamental-2962FF?style=flat-square) | Can't improve what you can't measure |
-| ![](https://img.shields.io/badge/6-AFB42B?style=flat-square&labelColor=AFB42B) | **Contextual Retrieval** | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | ![](https://img.shields.io/badge/-High-00C853?style=flat-square) | Enrich chunks at index time, no infra change |
-| ![](https://img.shields.io/badge/7-689F38?style=flat-square&labelColor=689F38) | **HyDE / Multi-Query** | ![](https://img.shields.io/badge/-Low-00C853?style=flat-square) | ![](https://img.shields.io/badge/-Medium-FFAB00?style=flat-square) | Quick LangChain prototypes |
-| ![](https://img.shields.io/badge/8-2E7D32?style=flat-square&labelColor=2E7D32) | **RAPTOR / GraphRAG** | ![](https://img.shields.io/badge/-High-C62828?style=flat-square) | ![](https://img.shields.io/badge/-Potentially_High-00C853?style=flat-square) | Long-term research track |
 
 <br>
 
